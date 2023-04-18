@@ -32,6 +32,17 @@ router.get("/acercade", async (req, res) => {
         console.log(error);
     }
 });
+/**
+ * Ruta para listar solo los nombres
+ */
+router.get("/listarNombres", async(req,res)=>{
+    try{
+        await callbacks.listarNombres(req,res)
+    }catch(error){
+        console.log(error)
+    }
+
+});
 
 
 

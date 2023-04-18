@@ -14,10 +14,10 @@ const faunadb = require('faunadb'),
     q = faunadb.query;
 
 const client = new faunadb.Client({
-    secret: '¿¿¿ CLAVE SECRETA EN FAUNA PARA ESTA BBDD???',
+    secret: 'fnAFBalxUIAAzTsaOFku3IxntlRj51Pw4CK5wdlD',
 });
 
-const COLLECTION = "¿¿¿ COLECCION ???"
+const COLLECTION = "BADMINTON"
 
 // CALLBACKS DEL MODELO
 
@@ -61,6 +61,22 @@ const CB_MODEL_SELECTS = {
         }
     },
 
+    listarNombres: async (req,res) => {
+        try {
+            let jugadores = await client.query(
+                q.Map(
+                    q.Paginate(q.Documents(q.Collection(COLLECTION))),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            CORS(res)
+                .status(200)
+                .json(jugadores)
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
+    
 }
 
 
@@ -93,9 +109,9 @@ const CB_OTHERS = {
         try {
             CORS(res).status(200).json({
                 mensaje: "Microservicio MS Plantilla: acerca de",
-                autor: "¿¿¿ AUTOR ???",
-                email: "¿¿¿ EMAIL ???",
-                fecha: "¿¿¿ FECHA ???"
+                autor: "Miguel Angel Carrasco Infante",
+                email: "maci0002@red.ujaen.es",
+                fecha: "13/08/01"
             });
         } catch (error) {
             CORS(res).status(500).json({ error: error.description })
