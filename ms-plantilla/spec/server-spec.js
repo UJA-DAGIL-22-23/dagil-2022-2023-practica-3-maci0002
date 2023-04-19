@@ -68,6 +68,17 @@ describe('Servidor PLANTILLA:', () => {
     });
 
   })
+  it('Devuelve un vector de tamaño 3 al consultar mediante listarPersonas', (done) => {
+    supertest(app)
+        .get('/listarPersonas')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect(function (res) {
+            assert(res.body.data.length === 3);
+        })
+        .end((error) => { error ? done.fail(error) : done(); }
+        );
+});
 });
 
 

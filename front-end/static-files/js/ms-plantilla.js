@@ -146,7 +146,6 @@ Plantilla.plantillaPersonas.cuerpo = `
         <td>${Plantilla.plantillaTags.NOMBRE}</td>
         <td>${Plantilla.plantillaTags.APELLIDOS}</td>
         <td>
-        <div><a href="javascript:Personas.mostrar('${Plantilla.plantillaTags.NOMBRE}')" class="opcion-secundaria mostrar">Mostrar</a></div>        </td>
     </tr>
     `;
 

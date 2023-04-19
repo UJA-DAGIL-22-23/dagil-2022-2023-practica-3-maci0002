@@ -35,9 +35,9 @@ router.get("/listarPersonas", async (req,res) => {
 /**
  * Ruta para listar solo los nombres
  */
-router.get("/getTodas", async(req, res)=>{
+router.get("/acercade", async(req, res)=>{
     try{
-        await callbacks.getTodas(req, res)
+        await callbacks.acercaDe(req, res)
     }catch(error){
         console.log(error)
     }
