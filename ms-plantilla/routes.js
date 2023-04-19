@@ -25,9 +25,9 @@ router.get("/", async (req, res) => {
 /**
  * Ruta Acerca De (es decir, About...)
  */
-router.get("/acercade", async (req, res) => {
+router.get("/listarPersonas", async (req,res) => {
     try {
-        await callbacks.acercaDe(req, res)
+        await callbacks.listarPersonas(req,res)
     } catch (error) {
         console.log(error);
     }
@@ -35,9 +35,9 @@ router.get("/acercade", async (req, res) => {
 /**
  * Ruta para listar solo los nombres
  */
-router.get("/listarNombres", async(req,res)=>{
+router.get("/getTodas", async(req, res)=>{
     try{
-        await callbacks.listarNombres(req,res)
+        await callbacks.getTodas(req, res)
     }catch(error){
         console.log(error)
     }

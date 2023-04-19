@@ -15,7 +15,7 @@ describe('API Gateway: rutas estáticas', () => {
   describe('Rutas estáticas de MS Plantilla', () => {
     it('Devuelve MS Plantilla Home Page', (done) => {
       supertest(app)
-        .get('/plantilla/')
+        .get('/badminton/')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
@@ -28,7 +28,7 @@ describe('API Gateway: rutas estáticas', () => {
     });
     it('Devuelve MS Plantilla Acerca De', (done) => {
       supertest(app)
-        .get('/plantilla/acercade')
+        .get('/badminton/acercade')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {

@@ -10,12 +10,15 @@
 /// Creo el espacio de nombres
 let Plantilla = {};
 
+
+Plantilla.plantillaPersonas = {}
+
 // Plantilla de datosDescargados vacíos
 Plantilla.datosDescargadosNulos = {
     mensaje: "Datos Descargados No válidos",
-    autor: "",
-    email: "",
-    fecha: ""
+    autor: "Miguel Angel Carrasco Infante",
+    email: "maci0002@red.ujaen.es",
+    fecha: "13/08/01"
 }
 
 // Tags que voy a usar para sustituir los campos
@@ -25,7 +28,7 @@ Plantilla.plantillaTags = {
 
 }
 
-Plantilla.plantillaTablaPersonas = {}
+
 
 
 
@@ -94,6 +97,7 @@ Plantilla.mostrarAcercaDe = function (datosDescargados) {
     const mensajeAMostrar = `<div>
     <p>${datosDescargados.mensaje}</p>
     <ul>
+        <li><b>Mensaje/a</b>: ${datosDescargados.mensaje}</li>
         <li><b>Autor/a</b>: ${datosDescargados.autor}</li>
         <li><b>E-mail</b>: ${datosDescargados.email}</li>
         <li><b>Fecha</b>: ${datosDescargados.fecha}</li>
@@ -112,9 +116,9 @@ Plantilla.mostrarAcercaDe = function (datosDescargados) {
 
 Plantilla.imprimePersonas = function (vector) {
     // Compongo el contenido que se va a mostrar dentro de la tabla
-    let msj = Plantilla.plantillaTablaPersonas.cabecera
-    vector.forEach(e => msj += Plantilla.plantillaTablaPersonas.actualiza(e))
-    msj += Plantilla.plantillaTablaPersonas.pie
+    let msj = Plantilla.plantillaPersonas.cabecera
+    vector.forEach(e => msj += Plantilla.plantillaPersonas.actualiza(e))
+    msj += Plantilla.plantillaPersonas.pie
 
     // Borro toda la info de Article y la sustituyo por la que me interesa
     Frontend.Article.actualizar("Listado de personas", msj)
@@ -123,41 +127,35 @@ Plantilla.imprimePersonas = function (vector) {
 
 //Funciones para crear una table
 //Funcion para crear la cabecera de una table
-Plantilla.plantillaTablaPersonas.cabecera = `<table width="100%" class="listado-personas">
+Plantilla.plantillaPersonas.cabecera = `<table width="100%" class="listado-personas">
                     <thead>
-                        <th width="10%">Id</th>
                         <th width="20%">Nombre</th>
                         <th width="20%">Apellidos</th>
-                   
+                  
 
                     </thead>
                     <tbody>
     `;
+Plantilla.plantillaPersonas.pie = `        </tbody>
+    </table>
+    `;
 
 //Cuerpo de la tabla
-Plantilla.plantillaTablaPersonas.cuerpo = `
+Plantilla.plantillaPersonas.cuerpo = `
     <tr title="${Plantilla.plantillaTags.NOMBRE}">
         <td>${Plantilla.plantillaTags.NOMBRE}</td>
         <td>${Plantilla.plantillaTags.APELLIDOS}</td>
         <td>
-                    <div><a href="javascript:Personas.mostrar('${Plantilla.plantillaTags.NOMBRE}')" class="opcion-secundaria mostrar">Mostrar</a></div>
-        </td>
+        <div><a href="javascript:Personas.mostrar('${Plantilla.plantillaTags.NOMBRE}')" class="opcion-secundaria mostrar">Mostrar</a></div>        </td>
     </tr>
     `;
 
-/**
- * Pie de la tabla en la que se muestran las personas
- * @returns Cadena con el pie de la tabla
- */
-Plantilla.plantillaTablaPersonas.pie= function () {
-    return "</tbody></table>";
-}
 /** 
 * Actualiza el cuerpo de la tabla con los datos de la persona que se le pasa
 * @param {Persona} Persona Objeto con los datos de la persona que queremos escribir en el TR
 * @returns La plantilla del cuerpo de la tabla con los datos actualizados
 */
-Plantilla.plantillaTablaPersonas.actualiza = function (persona) {
+Plantilla.plantillaPersonas.actualiza = function (persona) {
    return Plantilla.sustituyeTags(this.cuerpo, persona)
 }
 
@@ -185,7 +183,7 @@ Plantilla.recupera = async function (callBackFn) {
 
     // Intento conectar con el microservicio personas
     try {
-        const url = Frontend.API_GATEWAY + "/Quidditch/getTodas"
+        const url = Frontend.API_GATEWAY + "/badminton/listarPersonas"
         response = await fetch(url)
 
     } catch (error) {
@@ -208,18 +206,18 @@ Plantilla.recupera = async function (callBackFn) {
  * Función principal para responder al evento de elegir la opción "Home"
  */
 Plantilla.procesarHome = function () {
-    this.descargarRuta("/plantilla/", this.mostrarHome);
+    this.descargarRuta("/badminton/", this.mostrarHome);
 }
 
 Plantilla.procesarListarNombres = function (){
-    this.recupera(Plantilla.imprimePersonas);
+    Plantilla.recupera(Plantilla.imprimePersonas);
 }
 
 /**
  * Función principal para responder al evento de elegir la opción "Acerca de"
  */
 Plantilla.procesarAcercaDe = function () {
-    this.descargarRuta("/plantilla/acercade", this.mostrarAcercaDe);
+    this.descargarRuta("/badminton/acercade", this.mostrarAcercaDe);
 }
 
 

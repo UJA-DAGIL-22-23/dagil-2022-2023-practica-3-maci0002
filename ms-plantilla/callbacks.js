@@ -61,21 +61,7 @@ const CB_MODEL_SELECTS = {
         }
     },
 
-    listarNombres: async (req,res) => {
-        try {
-            let jugadores = await client.query(
-                q.Map(
-                    q.Paginate(q.Documents(q.Collection(COLLECTION))),
-                    q.Lambda("X", q.Get(q.Var("X")))
-                )
-            )
-            CORS(res)
-                .status(200)
-                .json(jugadores)
-        } catch (error) {
-            res.status(500).json({ error: error.description })
-        }
-    },
+   
     
 }
 
@@ -97,6 +83,23 @@ const CB_OTHERS = {
             CORS(res).status(200).json({ mensaje: "Microservicio MS Plantilla: home" });
         } catch (error) {
             CORS(res).status(500).json({ error: error.description })
+        }
+    },
+
+    listarPersonas: async (req, res) => {
+        try {
+            let personas = await client.query(
+                q.Map(
+                    q.Paginate(q.Documents(q.Collection(COLLECTION))),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            console.log( personas )
+            CORS(res)
+                .status(200)
+                .json(personas)
+        } catch (error) {
+            res.status(500).json({ error: error.description })
         }
     },
 
