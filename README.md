@@ -438,3 +438,22 @@ https://github.com/UJA-Desarrollo-Agil/descripcion-proyecto-microservicios-perso
 El código en ese repositorio muestra una aplicación similar, pero con mucha más funcionalidad que esta plantilla: acceso a base de datos remota, listado de documentos recuperados de la BBDD, peticiones entre distintos microservicios, etc.
 
 Además, incluye documentación sobre dicho código y un vídeo descriptivo de cómo se ha realizado y cómo funciona la aplicación de ejemplo.
+## Informacion del alumno
+Nombre: Miguel Ángel Carrasco Infante
+
+Correo: maci0002@red.ujaen.es
+
+## URL del tablero de TRELLO
+https://trello.com/invite/b/OJeusHWk/ATTI9c8c797581bcbdfa5be00701a217671201A79BD8/practica-3
+## Informacion sobre la base de datos
+### Imagen sobre el home de fauna:
+![image](https://user-images.githubusercontent.com/124813808/233115020-59fa015b-6d6c-43ee-8982-0a528b08b34e.png)
+### Imagen donde aparece la base de datos: 
+![image](https://user-images.githubusercontent.com/124813808/233116576-a927ce5c-7fe5-4576-a8bc-361f0d6e6bba.png)
+### Imagen donde aparece la coleccion: 
+![image](https://user-images.githubusercontent.com/124813808/233116857-49358eeb-123f-48e2-826d-33de635f9f34.png)
+
+
+
+
+
