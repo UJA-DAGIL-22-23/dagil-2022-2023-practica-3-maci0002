@@ -27,6 +27,19 @@ Plantilla.plantillaTags = {
     "APELLIDOS": "### APELLIDOS ###",
 
 }
+Plantilla.plantillaTagsTodos = {
+    "NOMBRE": "### NOMBRE ###",
+    "APELLIDOS": "### APELLIDOS ###",
+    "fechaNacimiento": "### fechaNacimiento ###",
+    "DIRECCION" : "### DIRECCION ###",
+    "PESO" : "### PESO ###",
+    "ALTURA" : "### ALTURA ###",
+    "manoDominante" : "###  manoDominante ###",
+    "clubActual" : "### clubActual ###",
+    "nTorneosGanados" : "### nTorneosGanados ###",
+    "nTorneosjugados" : "### nTorneosjugados ###"
+
+}
 
 
 
@@ -83,17 +96,14 @@ Plantilla.mostrarHome = function (datosDescargados) {
 Plantilla.mostrarAcercaDe = function (datosDescargados) {
     // Si no se ha proporcionado valor para datosDescargados
     datosDescargados = datosDescargados || this.datosDescargadosNulos
-
     // Si datos descargados NO es un objeto 
     if (typeof datosDescargados !== "object") datosDescargados = this.datosDescargadosNulos
-
     // Si datos descargados NO contiene los campos mensaje, autor, o email
     if (typeof datosDescargados.mensaje === "undefined" ||
         typeof datosDescargados.autor === "undefined" ||
         typeof datosDescargados.email === "undefined" ||
         typeof datosDescargados.fecha === "undefined"
     ) datosDescargados = this.datosDescargadosNulos
-
     const mensajeAMostrar = `<div>
     <p>${datosDescargados.mensaje}</p>
     <ul>
@@ -106,6 +116,7 @@ Plantilla.mostrarAcercaDe = function (datosDescargados) {
     `;
     Frontend.Article.actualizar("Plantilla Acerca de", mensajeAMostrar)
 }
+
 
 
 
@@ -124,6 +135,16 @@ Plantilla.imprimePersonas = function (vector) {
     Frontend.Article.actualizar("Listado de personas", msj)
 }
 
+Plantilla.imprimeTodasPersonas = function (vector) {
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj = Plantilla.plantillaPersonas.cabeceraTodos
+    vector.forEach(e => msj += Plantilla.plantillaPersonas.actualizaTodos(e))
+    msj += Plantilla.plantillaPersonas.pie
+
+    // Borro toda la info de Article y la sustituyo por la que me interesa
+    Frontend.Article.actualizar("Listado de personas", msj)
+}
+
 
 //Funciones para crear una table
 //Funcion para crear la cabecera de una table
@@ -131,11 +152,30 @@ Plantilla.plantillaPersonas.cabecera = `<table width="100%" class="listado-perso
                     <thead>
                         <th width="20%">Nombre</th>
                         <th width="20%">Apellidos</th>
+                        
+
                   
 
                     </thead>
                     <tbody>
     `;
+    Plantilla.plantillaPersonas.cabeceraTodos = `<table width="100%" class="listado-personas">
+    <thead>
+        <th width="20%">Nombre</th>
+        <th width="20%">Apellidos</th>
+        <th width="20%">F_nacimiento</th>
+        <th width="20%">Direccion </th>
+        <th width="20%">Peso</th>
+        <th width="20%">Altura</th>
+        <th width="20%">Mano dominante</th>
+        <th width="20%">Club actual</th>
+        <th width="20%">Número de torneos ganados</th>
+        <th width="20%">Número de torneos jugados</th>
+
+
+    </thead>
+    <tbody>
+`;
 Plantilla.plantillaPersonas.pie = `        </tbody>
     </table>
     `;
@@ -148,6 +188,22 @@ Plantilla.plantillaPersonas.cuerpo = `
         <td>
     </tr>
     `;
+    Plantilla.plantillaPersonas.cuerpoTodas = `
+    <tr title="${Plantilla.plantillaTagsTodos.NOMBRE}">
+        <td>${Plantilla.plantillaTagsTodos.NOMBRE}</td>
+        <td>${Plantilla.plantillaTagsTodos.APELLIDOS}</td>
+        <td>${Plantilla.plantillaTagsTodos.fechaNacimiento}</td>
+        <td>${Plantilla.plantillaTagsTodos.DIRECCION}</td> 
+        <td>${Plantilla.plantillaTagsTodos.PESO}</td>
+        <td>${Plantilla.plantillaTagsTodos.ALTURA}</td>
+        <td>${Plantilla.plantillaTagsTodos.manoDominante}</td>
+        <td>${Plantilla.plantillaTagsTodos.clubActual}</td>
+        <td>${Plantilla.plantillaTagsTodos.nTorneosGanados}</td>
+        <td>${Plantilla.plantillaTagsTodos.nTorneosjugados}</td>
+        <td>
+    </tr>
+    `;
+
 
 /** 
 * Actualiza el cuerpo de la tabla con los datos de la persona que se le pasa
@@ -157,6 +213,10 @@ Plantilla.plantillaPersonas.cuerpo = `
 Plantilla.plantillaPersonas.actualiza = function (persona) {
    return Plantilla.sustituyeTags(this.cuerpo, persona)
 }
+
+Plantilla.plantillaPersonas.actualizaTodos = function (persona) {
+    return Plantilla.sustituyeTagsTodos(this.cuerpoTodas, persona)
+ }
 
 /**
  * Actualiza el cuerpo de la plantilla deseada con los datos de la persona que se le pasa
@@ -168,9 +228,26 @@ Plantilla.sustituyeTags = function (plantilla, persona) {
     return plantilla
         .replace(new RegExp(Plantilla.plantillaTags.NOMBRE, 'g'), persona.data.nombre)
         .replace(new RegExp(Plantilla.plantillaTags.APELLIDOS, 'g'), persona.data.apellidos)
+        .replace(new RegExp(Plantilla.plantillaTags.APELLIDOS, 'g'), persona.data.apellidos)
+
 
 
 }
+
+Plantilla.sustituyeTagsTodos = function (plantilla, persona) {
+    return plantilla
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.NOMBRE, 'g'), persona.data.nombre)
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.APELLIDOS, 'g'), persona.data.apellidos)
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.fechaNacimiento, 'g'), persona.data.fechaNacimiento)        
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.DIRECCION, 'g'), persona.data.direccion)
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.PESO, 'g'), persona.data.peso)
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.ALTURA, 'g'), persona.data.altura)
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.manoDominante, 'g'), persona.data.manoDominante)
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.clubActual, 'g'), persona.data.clubActual)
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.nTorneosGanados, 'g'), persona.data.nTorneosGanados)
+        .replace(new RegExp(Plantilla.plantillaTagsTodos.nTorneosjugados, 'g'), persona.data.nTorneosJugados)
+}
+
 
 /**
  * Función que recuperar todas las personas llamando al MS Personas
@@ -200,7 +277,6 @@ Plantilla.recupera = async function (callBackFn) {
 }
 
 
-
 /**
  * Función principal para responder al evento de elegir la opción "Home"
  */
@@ -210,6 +286,10 @@ Plantilla.procesarHome = function () {
 
 Plantilla.procesarListarNombres = function (){
     Plantilla.recupera(Plantilla.imprimePersonas);
+}
+
+Plantilla.procesarListarTodos = function (){
+    Plantilla.recupera(Plantilla.imprimeTodasPersonas);
 }
 
 /**
