@@ -453,6 +453,20 @@ https://trello.com/invite/b/OJeusHWk/ATTI9c8c797581bcbdfa5be00701a217671201A79BD
 ### Imagen donde aparece la coleccion: 
 ![image](https://user-images.githubusercontent.com/124813808/233116857-49358eeb-123f-48e2-826d-33de635f9f34.png)
 
+## Incremento 1 realizado
+HU01, HU02, HU04 completadas
+### HU01
+![image](https://user-images.githubusercontent.com/124813808/233455097-83d3cbd5-c78e-4975-9935-a5086976df08.png)
+### HU02
+![image](https://user-images.githubusercontent.com/124813808/233455203-50b55dd7-c2e8-4db9-a1a5-5eaac09983c1.png)
+### HU04
+![image](https://user-images.githubusercontent.com/124813808/233455337-b036e9d2-49d9-406a-b95b-dc54b7448d72.png)
+### tablero de trello
+![image](https://user-images.githubusercontent.com/124813808/233455476-b8ee9252-6fdb-40be-aab4-c292386eef0b.png)
+
+
+
+
 
 
 
