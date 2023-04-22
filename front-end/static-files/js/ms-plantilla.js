@@ -145,6 +145,34 @@ Plantilla.imprimeTodasPersonas = function (vector) {
     Frontend.Article.actualizar("Listado de personas", msj)
 }
 
+Plantilla.ordenaCampos = function(vector,campo){
+    vector.sort(function(a,b)
+     {
+         let campoA = null; 
+         let campoB = null;  
+         
+             campoA = a.data[campo].toUpperCase();
+             campoB = b.data[campo].toUpperCase();
+         
+             if (campoA < campoB) {
+                 return -1;
+             }
+             if (campoA > campoB) {
+                 return 1;
+             }
+             return 0;
+     });
+     let msj = Plantilla.plantillaPersonas.cabecera
+     if (vector && Array.isArray(vector)) {
+         vector.forEach(e => msj += Plantilla.plantillaPersonas.actualizaTodos(e))
+     }
+         msj += Plantilla.plantillaPersonas.pie
+         // Para comprobar lo que hay en vector
+         // Borro toda la info de Article y la sustituyo por la que me interesa
+         Frontend.Article.actualizar("Listado ordenado por campo", msj)
+
+ }
+
 
 //Funciones para crear una table
 //Funcion para crear la cabecera de una table
@@ -275,6 +303,27 @@ Plantilla.recupera = async function (callBackFn) {
         callBackFn(vectorPersonas.data)
     }
 }
+Plantilla.recuperaTodos = async function (callBackFn, campo) {
+    let response = null
+
+    // Intento conectar con el microservicio personas
+    try {
+        const url = Frontend.API_GATEWAY + "/badminton/listarPersonas"
+        response = await fetch(url)
+
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Gateway")
+        console.error(error)
+        //throw error
+    }
+
+    // Muestro todas las persoans que se han descargado
+    let vectorPersonas = null
+    if (response) {
+        vectorPersonas = await response.json()
+        callBackFn(vectorPersonas.data, campo)
+    }
+}
 
 
 /**
@@ -291,6 +340,11 @@ Plantilla.procesarListarNombres = function (){
 Plantilla.procesarListarTodos = function (){
     Plantilla.recupera(Plantilla.imprimeTodasPersonas);
 }
+
+Plantilla.procesarCampoOrdenado = function (campo){
+    Plantilla.recuperaTodos(Plantilla.ordenaCampos, campo);
+}
+
 
 /**
  * Función principal para responder al evento de elegir la opción "Acerca de"
