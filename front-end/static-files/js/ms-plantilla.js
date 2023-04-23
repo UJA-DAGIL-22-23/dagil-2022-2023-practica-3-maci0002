@@ -166,12 +166,36 @@ Plantilla.ordenaCampos = function(vector,campo){
      if (vector && Array.isArray(vector)) {
          vector.forEach(e => msj += Plantilla.plantillaPersonas.actualizaTodos(e))
      }
+     msj += Plantilla.plantillaPersonas.pie
+     Frontend.Article.actualizar("Listado de personas solo con su nombre", msj)
+    }
+    Plantilla.ordenaNombre = function(vector,nombre){
+        vector.sort(function(a,b)
+         {
+             let nombreA = null; 
+             let nombreB = null;  
+             
+                 nombreA = a.data[nombre].toUpperCase();
+                 nombreB = b.data[nombre].toUpperCase();
+             
+                 if (nombreA < nombreB) {
+                     return -1;
+                 }
+                 if (nombreA > nombreB) {
+                     return 1;
+                 }
+                 return 0;
+         });
+         let msj = Plantilla.plantillaPersonas.cabecera
+         if (vector && Array.isArray(vector)) {
+             vector.forEach(e => msj += Plantilla.plantillaPersonas.actualiza(e))
+         }
          msj += Plantilla.plantillaPersonas.pie
-         // Para comprobar lo que hay en vector
-         // Borro toda la info de Article y la sustituyo por la que me interesa
-         Frontend.Article.actualizar("Listado ordenado por campo", msj)
+         Frontend.Article.actualizar("Listado de personas solo con su nombre", msj)
+        }
+    
 
- }
+     
 
 
 //Funciones para crear una table
@@ -344,6 +368,11 @@ Plantilla.procesarListarTodos = function (){
 Plantilla.procesarCampoOrdenado = function (campo){
     Plantilla.recuperaTodos(Plantilla.ordenaCampos, campo);
 }
+
+Plantilla.procesarOrdenadoAlfabeticamente = function (nombre){
+    Plantilla.recuperaTodos(Plantilla.ordenaNombre, nombre);
+}
+
 
 
 /**
