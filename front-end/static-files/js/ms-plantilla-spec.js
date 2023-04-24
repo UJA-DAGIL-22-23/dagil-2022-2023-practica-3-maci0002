@@ -12,6 +12,7 @@ const elementoTitulo = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TIT
 const elementoContenido = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO)
 const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
+const LISTADO_NOMBRE_MUCHAS_PERSONAS_TODOS_DATOS = "Jugadores de badminton ordenados por nombre mostrados con todos los datos"
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -122,6 +123,20 @@ describe("Plantilla.mostrarAcercaDe: ", function () {
             expect(elementoContenido.innerHTML.search(datosDescargadosPrueba.fecha) >= 0).toBeTrue()
         })
 })
+
+describe ("Plantilla.ordenaCampos", function(){
+    it("si le pasamos un valor nulo muestra los datos nulos",
+    function (){
+        Plantilla.ordenaCampos([])
+        expect(elementoTitulo.innerHTML).toBe(LISTADO_NOMBRES_ORDENADOS)
+    })
+    it("Si le pasamos datos nulos, devuelve datos nulos",
+    function(){
+        Plantilla.ordenaCampos(15)
+        expect(elementoTitulo.innerHTML).toBe(LISTADO_NOMBRES_ORDENADOS)
+    })
+})
+
 
 
 /*
