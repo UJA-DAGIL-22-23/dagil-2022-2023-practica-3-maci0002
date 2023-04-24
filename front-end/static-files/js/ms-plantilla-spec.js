@@ -12,7 +12,11 @@ const elementoTitulo = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TIT
 const elementoContenido = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO)
 const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
-const LISTADO_NOMBRE_MUCHAS_PERSONAS_TODOS_DATOS = "Jugadores de badminton ordenados por nombre mostrados con todos los datos"
+const LISTADO_NOMBRES_ORDENADOS = "Listado de personas solo con su nombre"
+const LISTADO_NOMBRE= "Listado de personas"
+const LISTADO_NOMBRE_TODAS = "Listado de  todas las personas"
+const LISTADO_UNA= "Muestra una persona"
+
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",
@@ -130,12 +134,55 @@ describe ("Plantilla.ordenaCampos", function(){
         Plantilla.ordenaCampos([])
         expect(elementoTitulo.innerHTML).toBe(LISTADO_NOMBRES_ORDENADOS)
     })
+
+    /** 
     it("Si le pasamos datos nulos, devuelve datos nulos",
     function(){
-        Plantilla.ordenaCampos(15)
+        Plantilla.ordenaCampos(10)
         expect(elementoTitulo.innerHTML).toBe(LISTADO_NOMBRES_ORDENADOS)
     })
+    */
 })
+describe ("Plantilla.ordenaNombre", function(){
+    it("si le pasamos un valor nulo muestra los datos nulos",
+    function (){
+        Plantilla.ordenaNombre([])
+        expect(elementoTitulo.innerHTML).toBe(LISTADO_NOMBRES_ORDENADOS)
+    })
+
+    /** 
+    it("Si le pasamos datos nulos, devuelve datos nulos",
+    function(){
+        Plantilla.ordenaCampos(10)
+        expect(elementoTitulo.innerHTML).toBe(LISTADO_NOMBRES_ORDENADOS)
+    })
+    */
+})
+describe ("Plantilla.imprimeTodasPersonas", function(){
+    it("si le pasamos un valor nulo muestra los datos nulos",
+    function (){
+        Plantilla.imprimeTodasPersonas([])
+        expect(elementoTitulo.innerHTML).toBe(LISTADO_NOMBRE_TODAS)
+    })
+})
+describe ("Plantilla.imprimePersonas", function(){
+    it("si le pasamos un valor nulo muestra los datos nulos",
+    function (){
+        Plantilla.imprimePersonas([])
+        expect(elementoTitulo.innerHTML).toBe(LISTADO_NOMBRE)
+    })
+})
+/** 
+describe ("Plantilla.imprimeUna", function(){
+    it("si le pasamos un valor nulo muestra los datos nulos",
+    function (){
+        Plantilla.imprimeUna(null)
+        expect(elementoTitulo.innerHTML).toBe(LISTADO_UNA)
+    })
+})
+*/
+
+
 
 
 

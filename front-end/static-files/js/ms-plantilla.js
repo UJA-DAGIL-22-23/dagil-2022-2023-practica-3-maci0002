@@ -130,7 +130,8 @@ Plantilla.mostrarAcercaDe = function (datosDescargados) {
 Plantilla.imprimePersonas = function (vector) {
     // Compongo el contenido que se va a mostrar dentro de la tabla
     let msj = Plantilla.plantillaPersonas.cabecera
-    vector.forEach(e => msj += Plantilla.plantillaPersonas.actualiza(e))
+    if (vector && Array.isArray(vector)) 
+        vector.forEach(e => msj += Plantilla.plantillaPersonas.actualiza(e))
     msj += Plantilla.plantillaPersonas.pie
 
     // Borro toda la info de Article y la sustituyo por la que me interesa
@@ -140,11 +141,12 @@ Plantilla.imprimePersonas = function (vector) {
 Plantilla.imprimeTodasPersonas = function (vector) {
     // Compongo el contenido que se va a mostrar dentro de la tabla
     let msj = Plantilla.plantillaPersonas.cabeceraTodos
-    vector.forEach(e => msj += Plantilla.plantillaPersonas.actualizaTodos(e))
+    if (vector && Array.isArray(vector)) 
+        vector.forEach(e => msj += Plantilla.plantillaPersonas.actualizaTodos(e))
     msj += Plantilla.plantillaPersonas.pie
 
     // Borro toda la info de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizar("Listado de personas", msj)
+    Frontend.Article.actualizar("Listado de  todas las personas", msj)
 }
 
 Plantilla.ordenaCampos = function(vector,campo){
@@ -371,9 +373,11 @@ Plantilla.personaTabla = function (persona){
 }
 
 Plantilla.imprimeUna = function (persona){
-    let msj = Plantilla.personaTabla(persona)
-    Frontend.Article.actualizar("Muestra una persona", msj)
-    Plantilla.almacenaUna(persona)
+    if(persona!=null){
+        let msj = Plantilla.personaTabla(persona)
+        Frontend.Article.actualizar("Muestra una persona", msj)
+        Plantilla.almacenaUna(persona)
+    }
 }
 Plantilla.almacenaUna = function (persona) {
     Plantilla.personaMostrada = persona;
