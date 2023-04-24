@@ -13,6 +13,8 @@ let Plantilla = {};
 
 Plantilla.plantillaPersonas = {}
 
+Plantilla.personaMostrada = null
+
 // Plantilla de datosDescargados vacíos
 Plantilla.datosDescargadosNulos = {
     mensaje: "Datos Descargados No válidos",
@@ -348,6 +350,38 @@ Plantilla.recuperaTodos = async function (callBackFn, campo) {
         callBackFn(vectorPersonas.data, campo)
     }
 }
+Plantilla.recuperaUna = async function (nombre, callBackFn) {
+    try {
+        const url = Frontend.API_GATEWAY + "/badminton/listarUna/" + nombre
+        const response = await fetch(url);
+        if (response) {
+            const persona = await response.json()
+            callBackFn(persona)
+        }
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Gateway")
+        console.error(error)
+    }
+}
+
+Plantilla.personaTabla = function (persona){
+    return Plantilla.plantillaPersonas.cabeceraTodos
+    + Plantilla.plantillaPersonas.actualizaTodos(persona)
+    + Plantilla.plantillaPersonas.pie;
+}
+
+Plantilla.imprimeUna = function (persona){
+    let msj = Plantilla.personaTabla(persona)
+    Frontend.Article.actualizar("Muestra una persona", msj)
+    Plantilla.almacenaUna(persona)
+}
+Plantilla.almacenaUna = function (persona) {
+    Plantilla.personaMostrada = persona;
+}
+Plantilla.mostrar = function (nombre){
+    this.recuperaUna(nombre, this.imprimeUna)
+}
+
 
 
 /**

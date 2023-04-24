@@ -102,6 +102,19 @@ const CB_OTHERS = {
             res.status(500).json({ error: error.description })
         }
     },
+    listarUna: async (req, res) => {
+        try {
+            let persona = await client.query(
+                q.Get(q.Ref(q.Collection(COLLECTION), req.params.nombre))
+            )
+       //     console.log( persona )
+            CORS(res)
+                .status(200)
+                .json(persona)
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
 
     /**
      * Devuelve un mensaje indicando que se ha accedido a la información Acerca De del microservicio

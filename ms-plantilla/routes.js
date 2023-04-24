@@ -44,6 +44,19 @@ router.get("/acercade", async(req, res)=>{
 
 });
 
+router.param("nombre", async (req, res, next, nombre) => {
+    next();
+});
+
+router.get("/listarUna/:nombre", async (req, res) =>{
+    try{
+        await callbacks.listarUna(req, res)
+    }catch (error){
+        console.log(error);
+    }
+
+});
+
 
 
 /**
