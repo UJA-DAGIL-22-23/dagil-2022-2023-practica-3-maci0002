@@ -26,10 +26,10 @@ describe('Servidor PLANTILLA:', () => {
           //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
           assert(res.body.hasOwnProperty('mensaje'));
           assert(res.body.mensaje === "Microservicio MS Plantilla: home");
-       /**    assert(res.body.autor === "Miguel Angel Carrasco Infante");
+           assert(res.body.autor === "Miguel Angel Carrasco Infante");
           assert(res.body.email === "maci0002@red.ujaen.es");
           assert(res.body.fecha ===  "13/08/01");
-*/
+
         })
         .end((error) => { error ? done.fail(error) : done() })
     });

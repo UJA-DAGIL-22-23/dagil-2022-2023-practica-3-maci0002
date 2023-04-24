@@ -22,7 +22,6 @@ describe('API Gateway: rutas estáticas', () => {
           //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
           assert(res.body.hasOwnProperty('mensaje'));
           assert(res.body.mensaje === "Microservicio MS Plantilla: home");
-
         })
         .end((error) => { error ? done.fail(error) : done() })
     });
@@ -35,12 +34,32 @@ describe('API Gateway: rutas estáticas', () => {
           //console.log( "BODY ACERCA DE ", res.body ); // Para comprobar qué contiene exactamente res.body
           assert(res.body.hasOwnProperty('mensaje'));
           assert(res.body.mensaje === "Microservicio MS Plantilla: acerca de");
-
+          assert(res.body.autor === "Miguel Angel Carrasco Infante");
+          assert(res.body.email === "maci0002@red.ujaen.es");
+          assert(res.body.fecha === "13/08/2001");
         })
         .end((error) => { error ? done.fail(error) : done() })
     });
   })
 });
+describe('API Gateway: acceso a ', () => {
+  describe('BBDD Personas', () => {
+      it(' > Obtener todas las personas: debe tener un campo data que es un array de 10 objetos', (done) => {
+          supertest(app)
+              .get('/badminton/listarPersonas')
+              .expect(200)
+              .expect('Content-Type', /json/)
+              .expect(function (res) {
+                  //console.log( "Get Todos Personas", res.body ); // Para comprobar qué contiene exactamente res.body
+                  assert(res.body.data[0].data.nombre === "Miguel");
+                  assert(res.body.data.length === 10);
+
+              })
+              .end((error) => { error ? done.fail(error) : done() })
+      });
+  });
+});
+
 
 
 
