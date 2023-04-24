@@ -463,6 +463,23 @@ HU01, HU02, HU04 completadas
 ![image](https://user-images.githubusercontent.com/124813808/233455337-b036e9d2-49d9-406a-b95b-dc54b7448d72.png)
 ### tablero de trello
 ![image](https://user-images.githubusercontent.com/124813808/233455476-b8ee9252-6fdb-40be-aab4-c292386eef0b.png)
+## Incremento 2 realizado
+HU03 HU05 y HU05 completadas
+### HU03
+![image](https://user-images.githubusercontent.com/124813808/234075776-aa6709e8-6e9c-4223-b6f3-133e2e20cd09.png)
+### HU05 
+Para esta historia de usuario he creado un desplegable en el que el usuario puede elegir los distintos campos disponibles y la aplicacion mostrará el elegido por el usuario ordenado 
+![image](https://user-images.githubusercontent.com/124813808/234075953-d64b45d4-1cba-4259-bc62-320c3d61f956.png)
+### HU06
+En esta historia de usuario he seleccionado el primer jugador y he mostrado todos sus campos
+![image](https://user-images.githubusercontent.com/124813808/234076301-00c69ff7-db27-4118-9efd-c08cbc804565.png)
+### trello
+![image](https://user-images.githubusercontent.com/124813808/234076588-0864aab3-98ee-4758-beb4-757f92b462bf.png)
+
+
+
+
+
 
 
 
